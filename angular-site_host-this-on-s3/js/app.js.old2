@@ -1,0 +1,53 @@
+/* Copyright © 2015, Shehryar Abbasi, All Rights Reserved. */
+
+angular.module('returnLambdaOutput', [])
+
+	.factory('PartsFactory', ['$http', function($http) {
+
+		var api = "https://n31ls64tb0.execute-api.us-west-2.amazonaws.com/test?perPage=8&lastPage=5";
+		var url = api
+		var exports = {};
+
+		return exports = {
+			getPart: function() {
+				return $http.jsonp(url, {jsonpCallbackParam: 'callback'})
+				 	.then(function(data) {
+				 		return data;
+				 });
+			}
+		}
+
+	}]) // end of Factory
+
+	.service('ParsingService', function() {
+
+		this.getSnippet = function(jsonData) {
+			console.log(jsonData);
+			return jsonData.snippet;
+		};
+
+		this.getMfgURL = function(jsonData) {
+			return jsonData.item.offers[0].product_url;
+		};
+
+		this.getMfgDatasheetURL = function(jsonData) {
+			if(typeof(jsonData.item.datasheets[0]) != 'undefined') 
+				return jsonData.item.datasheets[0].url;
+			else 
+				return "error";
+		};
+
+	}) // end of Service
+
+	.controller('ReposCtrl', ['$scope', '$sce', 'PartsFactory', 'ParsingService', function($scope, $sce, PartsFactory, ParsingService) {
+		//console.log('version: v1.37');
+		
+		//listen to click event, then use the Factory
+			
+			return PartsFactory.getPart()
+				.then(function(jsonData) {
+					console.log("data",jsonData[0]);
+				});
+
+
+  	}]); //end of Controller and App

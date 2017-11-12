@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="s3BucketChecker">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="show output of a lambda function">
+	<title>Repos</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" href="style.css"> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<!--<script type="text/javascript" src="js/angular-sanitize.min.js"></script>-->
+	<script type="text/javascript" src="js/app.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div ng-controller="BucketCtrl">
+		<div class="container">
+		<form class="navbar-form navbar-top" role="search" ng-submit="lookForBucket(searchInput)">
+				<div class="form-group">
+					<input type="text" class="form-control" size="50" placeholder="bucket name search, example: myBucket" ng-model="searchInput">
+				</div>
+
+				<button type="submit" class="btn btn-info">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+		</form>
+  <div id="loading" ng-show="loading">Invoking Lambda function ...</div>
+  <div id="BucketCtrl"> {{result}} </div>
+</div>
+</div>
+
+</body>
+<html>
